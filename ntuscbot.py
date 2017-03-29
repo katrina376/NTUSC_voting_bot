@@ -24,10 +24,10 @@ registered_uid=[]
 queue=[]
 idlist=[]# some ID, such as 'B01234567'
 
-def register(uid,rid):
+def register(uid, rid):
     if rid in idlist:
         #generate code
-        rcode="".join(random.sample(['0','1','2','3','4','5','6','7','8','9'], 5)).replace(" ","")
+        rcode = ''.join(random.choice("012345678") forr i in range(5))
         found = 0
         for i in queue:
             if i[0]==uid:
@@ -35,27 +35,28 @@ def register(uid,rid):
                 found = 1
         if not found:
             queue.append([uid, rcode, rid])
+
         #send code to ntumail
         fromaddr = username
-        toaddrs  = rid+'@ntu.edu.tw'
-        context =[
-          "From: ",
-          "To: ",
-          "Subject: NTUSC_vote_system",
-          "",
-          ""
-          ]
-        context[0]=context[0]+username
-        context[1]=context[1]+toaddrs
-        context[4]=rcode
-        msg = "\r\n".join(context)
+        receiver  = '{}@ntu.edu.tw'.format(rid)
+        message = """
+        From: {sender}
+        To: {receiver}
+        Subject: NTUSC_vote_system
+
+        {content}
+        """.format(
+            sender=username,
+            receiver=receiver,
+            content=rcode
+            )
         print(fromaddr)
-        print(toaddrs)
-        print(msg)
-        server.sendmail(fromaddr, toaddrs, msg)
+        print(receiver)
+        print(message)
+        server.sendmail(fromaddr, toaddrs, message)
 
     else:
-        bot.sendMessage(uid,"請輸入學代學號 ex:B01234567")
+        bot.sendMessage(uid, "請輸入學代學號 ex:B01234567")
 
 def verify(uid,rid,code):
     for i in queue:
