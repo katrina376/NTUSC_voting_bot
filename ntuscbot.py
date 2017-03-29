@@ -118,19 +118,20 @@ def handle(msg):
     if content_type == 'text':
         text = msg['text'].split(" ")
 
+        command = text[0]
         if chat_id not in registered_uid:
-            if text[0] == "/login":
+            if command == "/login":
                 register(chat_id, text[1])
-            elif text[0] == "/code":
+            elif command == "/code":
                 verify(chat_id, text[1], text[2])
             else:
                 default_answer(chat_id)
         else:
-            if text[0] == "/vote":
+            if command == "/vote":
                 vote(chat_id, text[1])
-            elif text[0] == "/new":
+            elif command == "/new":
                 newroll(chat_id, text[1])
-            elif text[0] == "/end":
+            elif command == "/end":
                 endroll(chat_id)
             else:
                 default_vote(chat_id)
