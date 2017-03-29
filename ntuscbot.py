@@ -66,7 +66,7 @@ def verify(uid,rid,code):
                 bot.sendMessage(uid,"成功登入")
             else:
                 bot.sendMessage(uid,"驗證碼錯誤")
-        return
+            return
     bot.sendMessage(uid,"尚未註冊")
 
 def vote(uid,number):
