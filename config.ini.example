@@ -1,0 +1,6 @@
+[MAIL]
+mail = <MAIL_FOR_REGISTER>
+
+
+[CONGRESS]
+chairperson_id = <ID_OF_CHAIRPERSON>

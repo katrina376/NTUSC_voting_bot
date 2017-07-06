@@ -22,6 +22,5 @@ bot = Congress(TOKEN, members=members, polls=polls, students=students)
 MessageLoop(bot).run_as_thread()
 
 print('Listening ...')
-# server.quit()
 while 1:
     sleep(10)
